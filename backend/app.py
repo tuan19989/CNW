@@ -68,4 +68,4 @@ def delete_user_by_id(customer_id):
     return jsonify({'message':result[0]}), result[1]
 
 if _name_ == "_main_":
-    print('this is data object package')
+    app.run(host='0.0.0.0',port=8080)
