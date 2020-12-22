@@ -3,7 +3,7 @@ import os
 # import BusinessObject as bo
 # import DataObject as do 
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 db_ip = os.getenv("db_ip")
 ConnectionData = {}
@@ -67,5 +67,5 @@ def hello():
 #     result = do.Customer(ConnectionData).delete(c)
 #     return jsonify({'message':result[0]}), result[1]
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8080)

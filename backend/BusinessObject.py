@@ -28,5 +28,5 @@ class Customer:
             'Country' : self.Country
         }
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     print('this is business object package')

@@ -122,5 +122,5 @@ class Customer:
             if con is not None:
                 con.close()
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     print('this is data object package')
