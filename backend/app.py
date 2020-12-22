@@ -67,5 +67,5 @@ def delete_user_by_id(customer_id):
     result = do.Customer(ConnectionData).delete(c)
     return jsonify({'message':result[0]}), result[1]
 
-    if _name_ == "_main_":
+if _name_ == "_main_":
     print('this is data object package')
