@@ -29,4 +29,4 @@ class Customer:
         }
 
 if _name_ == "_main_":
-    print('this is data object package')
+    print('this is business object package')
