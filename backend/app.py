@@ -67,5 +67,57 @@ def delete_user_by_id(customer_id):
     result = do.Customer(ConnectionData).delete(c)
     return jsonify({'message':result[0]}), result[1]
 
+
+
+@app.route('/order', methods=['POST'])
+def add_order():
+    data = request.json
+    order = OrderEntity(OrderID=data['Order_ID'],
+                                CustomerID=data['Customer_ID'],
+                                EmployeeID=data['Employee_ID'],
+                                OrderDate=data['Order_Date'],
+                                ShipperID=data['Shipper_ID'])
+    o = Order(connection_data)
+    message = o.insert(order)
+    if message is None:
+        return jsonify({
+            'message': 'Cannot insert data'
+        }), 500
+    return jsonify({
+        'message': message
+    })
+
+    @app.route('/order/all')
+def get_all_order():
+    o = Order(connection_data)
+    result = o.get_all()
+    return jsonify({
+        'data': result
+    })
+
+@app.route('/order/<int:id>', methods=['DELETE', 'PUT'])
+def delete_order_by_id(id):
+    if request.method == 'DELETE':
+        # Delete user by id
+        order = OrderEntity(customer_id=id)
+        o = Order(connection_data)
+        result = o.delete(order)
+        return jsonify({
+            'message': result[0]
+        }), result[1]
+    else:
+        # Update user by id
+        data = request.json
+        order = OrderEntity(Order_ID=id,
+                                    customer_id=data['customer_name'],
+                                    Employee_ID=data['contact_name'],
+                                    Order_Date=data['address'],
+                                    Shipper_ID=data['city'])
+        o = Order(connection_data)
+        result = o.update(order)
+        return jsonify({
+            'message': result[0]
+        }), result[1]
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8080)
