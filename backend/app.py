@@ -66,6 +66,41 @@ def delete_user_by_id(customer_id):
     c = bo.Customer(CustomerID=customer_id)
     result = do.Customer(ConnectionData).delete(c)
     return jsonify({'message':result[0]}), result[1]
+#Categories
+@app.route('/category/all')
+def get_all_category():
+    c = do.Category(ConnectionData).get_all()
+    return jsonify(c), 200
+@app.route('/user/insert', methods=['POST'])
+def user_insert():
+    data = request.json
+    c1 = bo.Categorie(data['CategoryID'], data['CategoryName'], data['Description'])
+    c2 = do.Categorie(ConnectionData)
+    s1 = c2.insert(c1)
+    result = {}
+    result['message'] = s1
+    return jsonify(result), 200
+    
+@app.route('/user/get/<int:Categorie_id>')
+def get_user_by_id(Categorie_id):
+    c = bo.Categorie(CategoryID=Categorie_id)
+    result = do.Categorie(ConnectionData).get_by_id(c)
+    if result[1] != 200:
+        return jsonify({'message':result[0]}), result[1]
+    return jsonify(result[0].to_json()), 200
+
+@app.route('/user/update/<int:Categorie_id>',methods=['PUT'])
+def update_user_by_id(Categorie_id):
+    data = request.json
+    c = bo.Categorie(CategoryID = Categorie_id, CategoryName=data['CategoryName'], Description=data['Description'])
+    result = do.Categorie(ConnectionData).update(c)
+    return jsonify({'message':result[0]}),result[1]
+
+@app.route('/user/delete/<int:Categorie_id>', methods=['DELETE'])
+def delete_user_by_id(Categorie_id):
+    c = bo.Categorie(CategoryID=Categorie_id)
+    result = do.Categorie(ConnectionData).delete(c)
+    return jsonify({'message':result[0]}), result[1]
 #Employee
 @app.route('/employee/insert', methods=['POST'])
 def employee_insert():
