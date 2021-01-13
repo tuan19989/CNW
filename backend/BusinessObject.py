@@ -144,6 +144,57 @@ class Product:
             'Unit': self.Unit,
             'Price': self.Price
         }
+#Shipper
+class Shipper:
+def__init_(self, ShipperID=None, ShipperName=None, Phone=None):
+        self.ShipperID = ShipperID
+        self.ShipperName = ShipperName
+        self.Phone = Phone
+
+    def fetch_data(self,data):
+        self.ShipperID = data[0]
+        self.ShipperName  = data[1]
+        self.Phone = data[2]
+    
+    def to_json(self):
+        return{
+            'ShipperID' : self.ShipperID,
+            'ShipperName' : self.ShipperName,
+            'Phone' : self.Phone
+        }
+#Supplier
+class Supplier:
+ def __init__(self, SupplierID=None, SupplierName=None, ContactName=None, Address=None, City=None, PostalCode=None, Country=None, Phone=None):
+        self.SupplierID = SupplierID
+        self.SupplierName = SupplierName
+        self.ContactName = ContactName
+        self.Address = Address
+        self.City = City
+        self.PostalCode = PostalCode
+        self.Country = Country
+        self.Phone = Phone
+
+    def fetch_data(self,data):
+        self.SupplierID = data[0]
+        self.SupplierName = data[1]
+        self.ContactName = data[2]
+        self.Address = data[3]
+        self.City = data[4]
+        self.PostalCode = data[5]
+        self.Country = data[6]
+        self.Phone = data[7]
+    
+    def to_json(self):
+        return{
+            'SupplierID' : self.SupplierID,
+            'SupplierName' : self.SupplierName,
+            'ContactName' : self.ContactName,
+            'Address' : self.Address,
+            'City' : self.City,
+            'PostalCode' : self.PostalCode,
+            'Country' : self.Country,
+            'Phone' : self.Phone
+        }
 
 if __name__ == "__main__":
     print('this is business object package')
