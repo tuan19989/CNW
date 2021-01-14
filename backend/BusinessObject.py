@@ -146,7 +146,7 @@ class Product:
         }
 #Shipper
 class Shipper:
-def__init_(self, ShipperID=None, ShipperName=None, Phone=None):
+    def __init__(self, ShipperID=None, ShipperName=None, Phone=None):
         self.ShipperID = ShipperID
         self.ShipperName = ShipperName
         self.Phone = Phone
