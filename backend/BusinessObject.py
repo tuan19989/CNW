@@ -29,7 +29,7 @@ class Customer:
         }
 #Categorie
 class Categorie:
-def__init_(self, CategoryID=None, CategoryName=None, Description=None):
+def__init__(self, CategoryID=None, CategoryName=None, Description=None):
         self.CategoryID = CategoryID
         self.CategoryName = CategoryName
         self.Description = Description
