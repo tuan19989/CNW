@@ -19,8 +19,8 @@ def hello():
    return "hello1234"
 @app.route("/test_insert")
 def test_insert():
-    c2 = do.employee(ConnectionData)
-    c1 = bo.employee('Tuan','Pham','1998')
+    c2 = do.Category(ConnectionData)
+    c1 = bo.Category('Tuan','Pham')
     s1 = c2.insert(c1)
     return s1
 
@@ -119,20 +119,17 @@ def get_all_employee():
 @app.route('/employee/<int:employee_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_employee(employee_id):
     if request.method == 'GET':
-        # Get 
         c = bo.Employee(EmployeeID=employee_id)
         result = do.Employee(ConnectionData).get_by_id(c)
         if result[1] != 200:
             return jsonify({'message': result[0]}), result[1]
         return jsonify(result[0].to_json()), 200
-    elif request.method == 'PUT':
-        # Update 
+    elif request.method == 'PUT': 
         data = request.json
         c = bo.Employee(EmployeeID=employee_id, LastName=data['LastName'], FirstName=data['FirstName'], Birthdate=data['Birthdate'], Photo=data['Photo'], Notes=data['Notes'])
         result = do.Employee(ConnectionData).update(c)
         return jsonify({'message': result[0]}), result[1]
     elif request.method == 'DELETE':
-        # Delete 
         c = bo.Employee(EmployeeID=employee_id)
         result = do.Employee(ConnectionData).delete(c)
         return jsonify({'message': result[0]}), result[1]
