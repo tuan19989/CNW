@@ -1,5 +1,12 @@
 import psycopg2
 from BusinessObject import Customer as CustomerEntity
+from BusinessObject import Employee as EmployeeEntity
+from BusinessObject import Supplier as SupplierEntity
+from BusinessObject import Category as CategoryEntity
+from BusinessObject import Order as OrderEntity
+from BusinessObject import OrderDetail as OrderDetailEntity
+from BusinessObject import Product as ProductEntity
+from BusinessObject import Shipper as ShipperEntity
 class Customer:
     def __init__(self,ConnectionData):
         self.ConnectionData = ConnectionData
@@ -121,128 +128,7 @@ class Customer:
         finally:
             if con is not None:
                 con.close()
-#Categorie
-class Categorie:
- def __init__(self,ConnectionData):
-        self.ConnectionData = ConnectionData
-    def insert(self,Categories: CategoryEntity):
-        con = None
-        try:
-            con = psycopg2.connect(user = self.ConnectionData['user'],
-                                password = self.ConnectionData['password'],
-                                host = self.ConnectionData['host'],
-                                port = self.ConnectionData['port'],
-                                database = self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "INSERT INTO TblCategories(CategoryName,Description) VALUES (%s,%s)"
-            record_to_insert = (Categories.CategoryName,Categories.Description)
-            cur.execute(sql, record_to_insert)
-            con.commit()
-            con.close()
-            return 'Insert TblCategories successfully'
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
 
-    def get_all(self):
-        con = None
-        try:
-            con = psycopg2.connect(user = self.ConnectionData['user'],
-                                password = self.ConnectionData['password'],
-                                host = self.ConnectionData['host'],
-                                port = self.ConnectionData['port'],
-                                database = self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "SELECT * FROM TblCategories"
-            cur.execute(sql)
-            con.commit()           
-            rows = cur.fetchall()
-            result = []
-            for row in rows:
-                c = CategoryEntity()
-                c.fetch_data(row)
-                result.append(c.to_json())
-            con.close()
-            return result
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
-
-    def get_by_id(self,Categorie: CategoryEntity):
-        con = None
-        try:
-            con = psycopg2.connect(user = self.ConnectionData['user'],
-                                password = self.ConnectionData['password'],
-                                host = self.ConnectionData['host'],
-                                port = self.ConnectionData['port'],
-                                database = self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "SELECT * FROM TblCategories WHERE Categorieid=%s"
-            cur.execute(sql,(Categorie.CategoryID, ))
-            con.commit()           
-            row = cur.fetchone()
-            if row:
-                c = CategoryEntity()
-                c.fetch_data(row)
-                return c, 200
-            con.close()
-            return "Categorie ID not found", 404
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
-
-    def update(self, Categorie: CategoryEntity):
-        con = None
-        try:
-            con = psycopg2.connect(user = self.ConnectionData['user'],
-                                password = self.ConnectionData['password'],
-                                host = self.ConnectionData['host'],
-                                port = self.ConnectionData['port'],
-                                database = self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "UPDATE TblCategories SET CategoryName=%s,Description=%s"
-            cur.execute(sql,(Categorie.CategoryName, Categorie.Description, Categorie.CategoryID))
-            con.commit()           
-            row = cur.rowcount
-            if row>0:
-                return "Updated Categorie", 200
-            con.close()
-            return "Categorie ID not found", 404
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
-
-    def delete(self, Categorie: CategoryEntity):
-        con = None
-        try:
-            con = psycopg2.connect(user = self.ConnectionData['user'],
-                                password = self.ConnectionData['password'],
-                                host = self.ConnectionData['host'],
-                                port = self.ConnectionData['port'],
-                                database = self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "DELETE FROM TblCategories WHERE Categorieid=%s"
-            cur.execute(sql,(Categorie.CustomerID,))
-            con.commit()           
-            row = cur.rowcount
-            if row>0:
-                return "Delete Categorie", 200
-            con.close()
-            return "Categorie ID not found", 404
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
-#Employee
 class Employee:
     def __init__(self, ConnectionData):
         self.ConnectionData = ConnectionData
@@ -365,7 +251,248 @@ class Employee:
             if con is not None:
                 con.close()
 
-#Order
+class Supplier:
+    def __init__(self, ConnectionData):
+        self.ConnectionData = ConnectionData
+    def insert(self, supplier):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "INSERT INTO tblsuppliers(Suppliername, ContactName, Address, City, PostalCode, Country, Phone) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            record_to_insert = (supplier.SupplierName, supplier.ContactName, supplier.Address, supplier.City, supplier.PostalCode, supplier.Country, supplier.Phone)
+            cur.execute(sql, record_to_insert)
+            con.commit()
+            con.close()
+            return 'Insert tblsuppliers successfully'
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def get_all(self):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "SELECT * FROM tblsuppliers"
+            cur.execute(sql)
+            con.commit()
+            rows = cur.fetchall()
+            result = []
+            for row in rows:
+                c = SupplierEntity()
+                c.fetch_data(row)            
+                result.append(c.to_json())
+            con.close()
+            return result
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def get_by_id(self, supplier: SupplierEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "SELECT * FROM tblsuppliers WHERE supplierid=%s"
+            cur.execute(sql, (supplier.SupplierID, ))
+            con.commit()
+            row = cur.fetchone()
+            if row:
+                c = SupplierEntity()
+                c.fetch_data(row)
+                return c, 200
+            con.close()
+            return 'Supplier ID not found', 404
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def update(self, supplier: SupplierEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "UPDATE tblsuppliers SET suppliername=%s, contactname=%s, address=%s, city=%s, postalcode=%s, country=%s, phone=%s WHERE supplierid=%s"
+            cur.execute(sql, (supplier.SupplierName, supplier.ContactName, supplier.Address, supplier.City, supplier.PostalCode, supplier.Country, supplier.Phone, supplier.SupplierID))
+            con.commit()
+            row = cur.rowcount
+            if row > 0:
+                return 'Updated supplier', 200
+            con.close()
+            return 'Supplier ID not found', 404
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def delete(self, supplier: SupplierEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "DELETE FROM tblsuppliers WHERE supplierid=%s"
+            cur.execute(sql, (supplier.SupplierID, ))
+            con.commit()
+            row = cur.rowcount
+            if row > 0:
+                return 'Deleted supplier', 200
+            con.close()
+            return 'Supplier ID not found', 404
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+class Category:
+    def __init__(self, ConnectionData):
+        self.ConnectionData = ConnectionData
+
+    def insert(self, category: CategoryEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "INSERT INTO tblcategories(categoryname, description) VALUES (%s, %s)"
+            record_to_insert = (category.CategoryName, category.Description)
+            cur.execute(sql, record_to_insert)
+            con.commit()
+            con.close()
+            return 'Insert tblcategories successfully'
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def get_all(self):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "SELECT * FROM tblcategories"
+            cur.execute(sql)
+            con.commit()
+            rows = cur.fetchall()
+            result = []
+            for row in rows:
+                c = CategoryEntity()
+                c.fetch_data(row)            
+                result.append(c.to_json())
+            con.close()
+            return result
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def get_by_id(self, category: CategoryEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "SELECT * FROM tblcategories WHERE categoryid=%s"
+            cur.execute(sql, (category.CategoryID, ))
+            con.commit()
+            row = cur.fetchone()
+            if row:
+                c = CategoryEntity()
+                c.fetch_data(row)
+                return c, 200
+            con.close()
+            return 'Category ID not found', 404
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def update(self, category: CategoryEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "UPDATE tblcategories SET categoryname=%s, description=%s WHERE categoryid=%s"
+            cur.execute(sql, (category.CategoryName, category.Description, category.CategoryID))
+            con.commit()
+            row = cur.rowcount
+            if row > 0:
+                return 'Updated category', 200
+            con.close()
+            return 'Category ID not found', 404
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
+    def delete(self, category: CategoryEntity):
+        con = None
+        try:
+            con = psycopg2.connect(user=self.ConnectionData['user'],
+                                  password=self.ConnectionData['password'],
+                                  host=self.ConnectionData['host'],
+                                  port=self.ConnectionData['port'],
+                                  database=self.ConnectionData['database'])
+            cur = con.cursor()
+            sql = "DELETE FROM tblcategories WHERE categoryid=%s"
+            cur.execute(sql, (category.CategoryID, ))
+            con.commit()
+            row = cur.rowcount
+            if row > 0:
+                return 'Deleted category', 200
+            con.close()
+            return 'Category ID not found', 404
+        except (Exception, psycopg2.DatabaseError) as error:
+            return str(error)
+        finally:
+            if con is not None:
+                con.close()
+
 class Order:
     def __init__(self, ConnectionData):
         self.ConnectionData = ConnectionData
@@ -487,7 +614,7 @@ class Order:
         finally:
             if con is not None:
                 con.close()
-#OrderDetail
+
 class OrderDetail:
     def __init__(self, ConnectionData):
         self.ConnectionData = ConnectionData
@@ -610,7 +737,6 @@ class OrderDetail:
             if con is not None:
                 con.close()
 
-#Product
 class Product:
     def __init__(self, ConnectionData):
         self.ConnectionData = ConnectionData
@@ -731,7 +857,7 @@ class Product:
         finally:
             if con is not None:
                 con.close()
-#Shipper
+
 class Shipper:
     def __init__(self, ConnectionData):
         self.ConnectionData = ConnectionData
@@ -852,127 +978,7 @@ class Shipper:
         finally:
             if con is not None:
                 con.close()
-#Supplier
-class Supplier:
-    def __init__(self, ConnectionData):
-        self.ConnectionData = ConnectionData
-    def insert(self, supplier):
-        con = None
-        try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "INSERT INTO tblsuppliers(Suppliername, ContactName, Address, City, PostalCode, Country, Phone) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            record_to_insert = (supplier.SupplierName, supplier.ContactName, supplier.Address, supplier.City, supplier.PostalCode, supplier.Country, supplier.Phone)
-            cur.execute(sql, record_to_insert)
-            con.commit()
-            con.close()
-            return 'Insert tblsuppliers successfully'
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
 
-    def get_all(self):
-        con = None
-        try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "SELECT * FROM tblsuppliers"
-            cur.execute(sql)
-            con.commit()
-            rows = cur.fetchall()
-            result = []
-            for row in rows:
-                c = SupplierEntity()
-                c.fetch_data(row)            
-                result.append(c.to_json())
-            con.close()
-            return result
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
-
-    def get_by_id(self, supplier: SupplierEntity):
-        con = None
-        try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "SELECT * FROM tblsuppliers WHERE supplierid=%s"
-            cur.execute(sql, (supplier.SupplierID, ))
-            con.commit()
-            row = cur.fetchone()
-            if row:
-                c = SupplierEntity()
-                c.fetch_data(row)
-                return c, 200
-            con.close()
-            return 'Supplier ID not found', 404
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
-
-    def update(self, supplier: SupplierEntity):
-        con = None
-        try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "UPDATE tblsuppliers SET suppliername=%s, contactname=%s, address=%s, city=%s, postalcode=%s, country=%s, phone=%s WHERE supplierid=%s"
-            cur.execute(sql, (supplier.SupplierName, supplier.ContactName, supplier.Address, supplier.City, supplier.PostalCode, supplier.Country, supplier.Phone, supplier.SupplierID))
-            con.commit()
-            row = cur.rowcount
-            if row > 0:
-                return 'Updated supplier', 200
-            con.close()
-            return 'Supplier ID not found', 404
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
-
-    def delete(self, supplier: SupplierEntity):
-        con = None
-        try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
-            cur = con.cursor()
-            sql = "DELETE FROM tblsuppliers WHERE supplierid=%s"
-            cur.execute(sql, (supplier.SupplierID, ))
-            con.commit()
-            row = cur.rowcount
-            if row > 0:
-                return 'Deleted supplier', 200
-            con.close()
-            return 'Supplier ID not found', 404
-        except (Exception, psycopg2.DatabaseError) as error:
-            return str(error)
-        finally:
-            if con is not None:
-                con.close()
 
 
 if __name__ == "__main__":
