@@ -122,25 +122,24 @@ class Customer:
             if con is not None:
                 con.close()
 #Categorie
-class Category:
-    def __init__(self, ConnectionData):
+class Categorie:
+ def __init__(self,ConnectionData):
         self.ConnectionData = ConnectionData
-
-    def insert(self, category: CategoryEntity):
+    def insert(self,Categories: CategoryEntity):
         con = None
         try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
+            con = psycopg2.connect(user = self.ConnectionData['user'],
+                                password = self.ConnectionData['password'],
+                                host = self.ConnectionData['host'],
+                                port = self.ConnectionData['port'],
+                                database = self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "INSERT INTO tblcategories(categoryname, description) VALUES (%s, %s)"
-            record_to_insert = (category.CategoryName, category.Description)
+            sql = "INSERT INTO TblCategories(CategoryName,Description) VALUES (%s,%s)"
+            record_to_insert = (Categories.CategoryName,Categories.Description)
             cur.execute(sql, record_to_insert)
             con.commit()
             con.close()
-            return 'Insert tblcategories successfully'
+            return 'Insert TblCategories successfully'
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:
@@ -150,20 +149,20 @@ class Category:
     def get_all(self):
         con = None
         try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
+            con = psycopg2.connect(user = self.ConnectionData['user'],
+                                password = self.ConnectionData['password'],
+                                host = self.ConnectionData['host'],
+                                port = self.ConnectionData['port'],
+                                database = self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "SELECT * FROM tblcategories"
+            sql = "SELECT * FROM TblCategories"
             cur.execute(sql)
-            con.commit()
+            con.commit()           
             rows = cur.fetchall()
             result = []
             for row in rows:
                 c = CategoryEntity()
-                c.fetch_data(row)            
+                c.fetch_data(row)
                 result.append(c.to_json())
             con.close()
             return result
@@ -173,71 +172,71 @@ class Category:
             if con is not None:
                 con.close()
 
-    def get_by_id(self, category: CategoryEntity):
+    def get_by_id(self,Categorie: CategoryEntity):
         con = None
         try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
+            con = psycopg2.connect(user = self.ConnectionData['user'],
+                                password = self.ConnectionData['password'],
+                                host = self.ConnectionData['host'],
+                                port = self.ConnectionData['port'],
+                                database = self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "SELECT * FROM tblcategories WHERE categoryid=%s"
-            cur.execute(sql, (category.CategoryID, ))
-            con.commit()
+            sql = "SELECT * FROM TblCategories WHERE Categorieid=%s"
+            cur.execute(sql,(Categorie.CategoryID, ))
+            con.commit()           
             row = cur.fetchone()
             if row:
                 c = CategoryEntity()
                 c.fetch_data(row)
                 return c, 200
             con.close()
-            return 'Category ID not found', 404
+            return "Categorie ID not found", 404
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:
             if con is not None:
                 con.close()
 
-    def update(self, category: CategoryEntity):
+    def update(self, Categorie: CategoryEntity):
         con = None
         try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
+            con = psycopg2.connect(user = self.ConnectionData['user'],
+                                password = self.ConnectionData['password'],
+                                host = self.ConnectionData['host'],
+                                port = self.ConnectionData['port'],
+                                database = self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "UPDATE tblcategories SET categoryname=%s, description=%s WHERE categoryid=%s"
-            cur.execute(sql, (category.CategoryName, category.Description, category.CategoryID))
-            con.commit()
+            sql = "UPDATE TblCategories SET CategoryName=%s,Description=%s"
+            cur.execute(sql,(Categorie.CategoryName, Categorie.Description, Categorie.CategoryID))
+            con.commit()           
             row = cur.rowcount
-            if row > 0:
-                return 'Updated category', 200
+            if row>0:
+                return "Updated Categorie", 200
             con.close()
-            return 'Category ID not found', 404
+            return "Categorie ID not found", 404
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:
             if con is not None:
                 con.close()
 
-    def delete(self, category: CategoryEntity):
+    def delete(self, Categorie: CategoryEntity):
         con = None
         try:
-            con = psycopg2.connect(user=self.ConnectionData['user'],
-                                  password=self.ConnectionData['password'],
-                                  host=self.ConnectionData['host'],
-                                  port=self.ConnectionData['port'],
-                                  database=self.ConnectionData['database'])
+            con = psycopg2.connect(user = self.ConnectionData['user'],
+                                password = self.ConnectionData['password'],
+                                host = self.ConnectionData['host'],
+                                port = self.ConnectionData['port'],
+                                database = self.ConnectionData['database'])
             cur = con.cursor()
-            sql = "DELETE FROM tblcategories WHERE categoryid=%s"
-            cur.execute(sql, (category.CategoryID, ))
-            con.commit()
+            sql = "DELETE FROM TblCategories WHERE Categorieid=%s"
+            cur.execute(sql,(Categorie.CustomerID,))
+            con.commit()           
             row = cur.rowcount
-            if row > 0:
-                return 'Deleted category', 200
+            if row>0:
+                return "Delete Categorie", 200
             con.close()
-            return 'Category ID not found', 404
+            return "Categorie ID not found", 404
         except (Exception, psycopg2.DatabaseError) as error:
             return str(error)
         finally:
