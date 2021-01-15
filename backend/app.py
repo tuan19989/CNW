@@ -13,7 +13,6 @@ ConnectionData['password'] = 'postgres'
 ConnectionData['host'] = str(db_ip)
 ConnectionData['port'] = '5432'
 ConnectionData['database'] = 'northwind'
-#Customer
 @app.route("/")
 def hello():
    return "hello1234"

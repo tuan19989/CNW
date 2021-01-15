@@ -27,7 +27,25 @@ class Customer:
             'PostalCode' : self.PostalCode,
             'Country' : self.Country
         }
-#Categorie
+#Categories
+class Category:
+    def __init__(self, CategoryID=None, CategoryName=None, Description=None):
+        self.CategoryID = CategoryID
+        self.CategoryName = CategoryName
+        self.Description = Description
+
+    def fetch_data(self, data):
+        self.CategoryID = data[0]
+        self.CategoryName = data[1]
+        self.Description = data[2]
+
+    def to_json(self):
+        return {
+            'CategoryID': self.CategoryID,
+            'CategoryName': self.CategoryName,
+            'Description': self.Description
+        }
+#Employee
 class Employee:
     def __init__(self, EmployeeID=None, LastName=None, FirstName=None, Birthdate=None, Photo=None, Notes=None):
         self.EmployeeID = EmployeeID
@@ -55,55 +73,26 @@ class Employee:
             'Notes': self.Notes
         }
 
-class Supplier:
-    def __init__(self, SupplierID=None, SupplierName=None, ContactName=None, Address=None, City=None, PostalCode=None, Country=None, Phone=None):
-        self.SupplierID = SupplierID
-        self.SupplierName = SupplierName
-        self.ContactName = ContactName
-        self.Address = Address
-        self.City = City
-        self.PostalCode = PostalCode
-        self.Country = Country
-        self.Phone = Phone
+#OrderDetail
+class OrderDetail:
+    def __init__(self, OrderDetailID=None, OrderID=None, ProductID=None, Quantity=None):
+        self.OrderDetailID = OrderDetailID
+        self.OrderID = OrderID
+        self.ProductID = ProductID
+        self.Quantity = Quantity
 
     def fetch_data(self, data):
-        self.SupplierID = data[0]
-        self.SupplierName = data[1]
-        self.ContactName = data[2]
-        self.Address = data[3]
-        self.City = data[4]
-        self.PostalCode = data[5]
-        self.Country = data[6]
-        self.Phone = data[7]
+        self.OrderDetailID = data[0]
+        self.OrderID = data[1]
+        self.ProductID = data[2]
+        self.Quantity = data[3]
 
     def to_json(self):
         return {
-            'SupplierID': self.SupplierID,
-            'SupplierName': self.SupplierName,
-            'ContactName': self.ContactName,
-            'Address': self.Address,
-            'City': self.City,
-            'PostalCode': self.PostalCode,
-            'Country': self.Country,
-            'Phone': self.Phone
-        }
-#Categories
-class Category:
-    def __init__(self, CategoryID=None, CategoryName=None, Description=None):
-        self.CategoryID = CategoryID
-        self.CategoryName = CategoryName
-        self.Description = Description
-
-    def fetch_data(self, data):
-        self.CategoryID = data[0]
-        self.CategoryName = data[1]
-        self.Description = data[2]
-
-    def to_json(self):
-        return {
-            'CategoryID': self.CategoryID,
-            'CategoryName': self.CategoryName,
-            'Description': self.Description
+            'OrderDetailID': self.OrderDetailID,
+            'OrderID': self.OrderID,
+            'ProductID': self.ProductID,
+            'Quantity': self.Quantity
         }
 #Order
 class Order:
@@ -128,28 +117,7 @@ class Order:
             'EmployeeID': self.EmployeeID,
             'OrderDate': self.OrderDate,
             'ShipperID': self.ShipperID
-        }
-#OrderDetail
-class OrderDetail:
-    def __init__(self, OrderDetailID=None, OrderID=None, ProductID=None, Quantity=None):
-        self.OrderDetailID = OrderDetailID
-        self.OrderID = OrderID
-        self.ProductID = ProductID
-        self.Quantity = Quantity
-
-    def fetch_data(self, data):
-        self.OrderDetailID = data[0]
-        self.OrderID = data[1]
-        self.ProductID = data[2]
-        self.Quantity = data[3]
-
-    def to_json(self):
-        return {
-            'OrderDetailID': self.OrderDetailID,
-            'OrderID': self.OrderID,
-            'ProductID': self.ProductID,
-            'Quantity': self.Quantity
-        }
+        }   
 #Product
 class Product:
     def __init__(self, ProductID=None, ProductName=None, SupplierID=None, CategoryID=None, Unit=None, Price=None):
@@ -196,6 +164,39 @@ class Shipper:
             'ShipperID': self.ShipperID,
             'ShipperName': self.ShipperName,
             'Phone': self.Phone
-        }         
+        }    
+#Supplier
+class Supplier:
+    def __init__(self, SupplierID=None, SupplierName=None, ContactName=None, Address=None, City=None, PostalCode=None, Country=None, Phone=None):
+        self.SupplierID = SupplierID
+        self.SupplierName = SupplierName
+        self.ContactName = ContactName
+        self.Address = Address
+        self.City = City
+        self.PostalCode = PostalCode
+        self.Country = Country
+        self.Phone = Phone
+
+    def fetch_data(self, data):
+        self.SupplierID = data[0]
+        self.SupplierName = data[1]
+        self.ContactName = data[2]
+        self.Address = data[3]
+        self.City = data[4]
+        self.PostalCode = data[5]
+        self.Country = data[6]
+        self.Phone = data[7]
+
+    def to_json(self):
+        return {
+            'SupplierID': self.SupplierID,
+            'SupplierName': self.SupplierName,
+            'ContactName': self.ContactName,
+            'Address': self.Address,
+            'City': self.City,
+            'PostalCode': self.PostalCode,
+            'Country': self.Country,
+            'Phone': self.Phone
+        }  
 if __name__ == "__main__":
     print('this is business object package')
