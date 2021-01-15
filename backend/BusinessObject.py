@@ -164,7 +164,7 @@ class Shipper:
         }
 #Supplier
 class Supplier:
- def __init__(self, SupplierID=None, SupplierName=None, ContactName=None, Address=None, City=None, PostalCode=None, Country=None, Phone=None):
+    def __init__(self, SupplierID=None, SupplierName=None, ContactName=None, Address=None, City=None, PostalCode=None, Country=None, Phone=None):
         self.SupplierID = SupplierID
         self.SupplierName = SupplierName
         self.ContactName = ContactName
