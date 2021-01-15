@@ -87,7 +87,7 @@ class Supplier:
             'Country': self.Country,
             'Phone': self.Phone
         }
-
+#Category
 class Category:
     def __init__(self, CategoryID=None, CategoryName=None, Description=None):
         self.CategoryID = CategoryID
@@ -105,7 +105,7 @@ class Category:
             'CategoryName': self.CategoryName,
             'Description': self.Description
         }
-
+#Order
 class Order:
     def __init__(self, OrderID=None, CustomerID=None, EmployeeID=None, OrderDate=None, ShipperID=None):
         self.OrderID = OrderID
@@ -129,7 +129,7 @@ class Order:
             'OrderDate': self.OrderDate,
             'ShipperID': self.ShipperID
         }
-
+#OrderDetail
 class OrderDetail:
     def __init__(self, OrderDetailID=None, OrderID=None, ProductID=None, Quantity=None):
         self.OrderDetailID = OrderDetailID
@@ -150,7 +150,7 @@ class OrderDetail:
             'ProductID': self.ProductID,
             'Quantity': self.Quantity
         }
-
+#Product
 class Product:
     def __init__(self, ProductID=None, ProductName=None, SupplierID=None, CategoryID=None, Unit=None, Price=None):
         self.ProductID = ProductID
@@ -177,8 +177,7 @@ class Product:
             'Unit': self.Unit,
             'Price': self.Price
         }
-
-
+#Shipper
 class Shipper:
     def __init__(self, ShipperID=None, ShipperName=None, Phone=None):
         self.ShipperID = ShipperID
@@ -198,6 +197,5 @@ class Shipper:
             'ShipperName': self.ShipperName,
             'Phone': self.Phone
         }         
-
 if __name__ == "__main__":
     print('this is business object package')
