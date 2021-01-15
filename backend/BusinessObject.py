@@ -87,7 +87,7 @@ class Supplier:
             'Country': self.Country,
             'Phone': self.Phone
         }
-#Category
+#Categories
 class Category:
     def __init__(self, CategoryID=None, CategoryName=None, Description=None):
         self.CategoryID = CategoryID
