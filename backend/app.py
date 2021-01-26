@@ -20,7 +20,7 @@ def hello():
 @app.route("/test_insert")
 def test_insert():
     c2 = do.Employee(ConnectionData)
-    c1 = bo.Employee('Tuan','Pham','0205','123','vip')
+    c1 = bo.Employee('Tuan','Pham','05','','vip')
     s1 = c2.insert(c1)
     return s1
 
