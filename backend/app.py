@@ -5,6 +5,7 @@ import BusinessObject as bo
 import DataObject as do 
 
 app = Flask(__name__)
+CORS(app)
 
 db_ip = os.getenv("db_ip")
 ConnectionData = {}
@@ -18,8 +19,8 @@ def hello():
    return "hello1234"
 @app.route("/test_insert")
 def test_insert():
-    c2 = do.category(ConnectionData)
-    c1 = bo.category('Tuan','Pham')
+    c2 = do.categories(ConnectionData)
+    c1 = bo.categories('Tuan','Pham')
     s1 = c2.insert(c1)
     return s1
 
