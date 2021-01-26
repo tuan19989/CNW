@@ -19,8 +19,8 @@ def hello():
    return "hello1234"
 @app.route("/test_insert")
 def test_insert():
-    c2 = do.categories(ConnectionData)
-    c1 = bo.categories('Tuan','Pham')
+    c2 = do.Category(ConnectionData)
+    c1 = bo.Category('Tuan','Pham')
     s1 = c2.insert(c1)
     return s1
 
