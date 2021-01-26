@@ -50,7 +50,7 @@
 . ShipperName: string
 . Phone: string
 # Supplier
-.. SupplierID: int
+. SupplierID: int
 . SupplierName: string
 . ContactName: string
 . Address: string
@@ -59,3 +59,11 @@
 .Country: string
 . Phone: string
 # API
+# Customer
+# Get all customer
+Request
+Method: GET
+Endpoint: /user/all
+Params: None
+Body: None
+Response: [Customer]
