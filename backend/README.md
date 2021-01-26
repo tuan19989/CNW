@@ -62,8 +62,8 @@
 # Customer
 # Get all customer
 Request
-Method: GET
-Endpoint: /user/all
-Params: None
-Body: None
++ Method: GET
++ Endpoint: /user/all
+- Params: None
+- Body: None
 Response: [Customer]
