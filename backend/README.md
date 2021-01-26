@@ -65,5 +65,5 @@ Request
 + Method: GET
 + Endpoint: /user/all
 - Params: None
-- Body: None
-Response: [Customer]
+> Body: None
+> Response: [Customer]
