@@ -7,6 +7,7 @@
 1. Dừng và xóa vùng chứa cũ: docker stop flask-backend && docker rm flask-backend
 2. Xây dựng hình ảnh: docker build -t backend .
 3. chạy vùng chứ :sudo docker run -d --name backend --env db_ip=10.0.2.15 -p 8080:8080 backend
+4. Cài NAT để insert,update,delete trên Postman
 # Entity
 # Customer
 * CustomerID: int
