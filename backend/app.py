@@ -20,7 +20,7 @@ def hello():
 @app.route("/test_insert")
 def test_insert():
     c2 = do.Employee(ConnectionData)
-    c1 = bo.Employee(1,'Tuan','Pham','1998','1','vip')
+    c1 = bo.Employee(Tuan,'Pham','1998','1','vip')
     s1 = c2.insert(c1)
     return s1
 
@@ -104,7 +104,7 @@ def delete_category_by_id(category_id):
 @app.route('/employee/insert', methods=['POST'])
 def employee_insert():
     data = request.json
-    c1 = bo.Employee(1,LastName=data['LastName'], FirstName=data['FirstName'], Birthdate=data['Birthdate'], Photo=data['Photo'], Notes=data['Notes'])
+    c1 = bo.Employee(LastName=data['LastName'], FirstName=data['FirstName'], Birthdate=data['Birthdate'], Photo=data['Photo'], Notes=data['Notes'])
     c2 = do.Employee(ConnectionData)
     s1 = c2.insert(c1)
     result = {}
