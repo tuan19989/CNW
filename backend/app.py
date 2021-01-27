@@ -20,7 +20,7 @@ def hello():
 @app.route("/test_insert")
 def test_insert():
     c2 = do.Order(ConnectionData)
-    c1 = bo.Order('6','2','tuan','pham')
+    c1 = bo.Order('6','2','1','pham')
     s1 = c2.insert(c1)
     return s1
 
