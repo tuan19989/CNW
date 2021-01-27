@@ -80,3 +80,49 @@
         * Country: string
     * Response: Message
 # Update a customer
+* Request:
+    * Method: POST
+    * Endpoint: /user/update/:customer_id
+    * Body:
+        * CustomerName: string
+        * ContactName: string
+        * Address: string
+        * City: string
+        * PostalCode: string
+        * Country: string
+* Response: Message
+# Delete a customer
+* Request:
+    * Method: DELETE
+    * Endpoint: /user/delete/:customer_id
+* Response: message
+# category
+# Get all category
+* Request:
+    * Method: GET
+    * Endpoint: /category/all
+    * Params: None
+    * Body: None Response: [category]
+# Add a category
+* Request:
+    * Method: POST
+    * Endpoint: category/insert
+    * Body:
+        * CategoryName: string
+        * Description: string
+* Response: Message
+# Update a category
+* Request:
+    * Method: PUT
+    * Endpoint: /category/update/:category_id
+    * Body:
+        * CategoryName: string
+        * Description: string
+* Response: Message
+# Delete a category
+* Request:
+    * Method: DELETE
+    * Endpoint: /category/delete/:category_id
+* Response: message
+# Employee
+
