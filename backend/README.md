@@ -1,8 +1,8 @@
 # CNW
 # docker back end
-# Phạm Công Tuấn(5 bảng)
-# Võ Văn Tứ
-# Nguyễn Trọng Hưng
+# Phạm Công Tuấn(4 bảng)
+# Võ Văn Tứ(2 bảng)
+# Nguyễn Trọng Hưng(2 bảng)
 # Cách Chạy 
 1. Dừng và xóa vùng chứa cũ: docker stop flask-backend && docker rm flask-backend
 2. Xây dựng hình ảnh: docker build -t backend .
