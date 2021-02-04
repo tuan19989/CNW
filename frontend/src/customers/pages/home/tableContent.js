@@ -9,7 +9,7 @@ function TableContent({ items, onDeleteSuccess }) {
   // === props.checkUpdateSuccess
   function handleOnDelete(id) {
     //Handle when click button Delete
-    CRUD.deleteOne(id).then((res) => {
+    CRUD.deleteOneCus(id).then((res) => {
       // Call CURD from services
       // check response message
       onDeleteSuccess(true);

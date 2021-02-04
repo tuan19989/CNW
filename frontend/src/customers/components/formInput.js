@@ -41,8 +41,8 @@ function FormInput({ onSubmitSuccess, type, updateID, updateItem }) {
     console.log("POST DATA: " + JSON.stringify(postData));
     const crudType =
       type === "update"
-        ? CRUD.updateOne(updateID, postData)
-        : CRUD.create(postData);
+        ? CRUD.updateOneCus(updateID, postData)
+        : CRUD.createCus(postData);
 
     crudType
       .then((res) => {

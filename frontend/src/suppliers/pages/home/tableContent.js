@@ -25,7 +25,7 @@ function TableContent({ items, onDeleteSuccess }) {
     <Table striped>
       <thead>
         <tr>
-          <th>SupplierID</th>
+          <th>ID</th>
           <th>Supplier Name</th>
           <th>Contact Name</th>
           <th>Address</th>

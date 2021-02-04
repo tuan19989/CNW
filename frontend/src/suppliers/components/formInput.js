@@ -100,6 +100,16 @@ function FormInput({ onSubmitSuccess, type, updateID, updateItem }) {
           id=""
         />
       </FormGroup>
+      <FormGroup>
+        <Label for="Phone">Phone</Label>
+        <Input
+          type="text"
+          name="Phone"
+          value={postData.Phone}
+          onChange={handleChangeData}
+          placeholder="Phone"
+        />
+      </FormGroup>
 
       <input type="text" name="City" value="this is city" hidden />
       <input type="text" name="PostalCode" value="this is postalCode" hidden />

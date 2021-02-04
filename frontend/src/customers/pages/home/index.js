@@ -14,7 +14,7 @@ function Home() {
   const RetrieveAllCustomers = () => {
     // <=> function RetrieveAllCustomers(){}
     console.log("Retrieve all customer");
-    CRUD.getAll().then((res) => {
+    CRUD.getAllCus().then((res) => {
       //console.log(res);
       setListCustomers(res.data); //Set list customers after get all result from server
       setCheckUpdate(false);

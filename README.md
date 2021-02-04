@@ -11,7 +11,7 @@
 # Entity
 # Customer
 * CustomerID: int
-* CustomerNName: string
+* CustomerName: string
 * ContactName: string
 * Address: string
 * City: string

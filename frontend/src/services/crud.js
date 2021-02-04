@@ -1,18 +1,18 @@
 import HttpRequest from "./http-common";
 
-const getAll = async () => {
+const getAllCus = async () => {
   return await HttpRequest.get("http://192.168.1.12:8080/user/all");
 };
 
-const create = (data) => {
+const createCus = (data) => {
   return HttpRequest.post("http://192.168.1.12:8080/user/insert", data);
 };
 
-const deleteOne = (id) => {
+const deleteOneCus = (id) => {
   return HttpRequest.delete(`http://192.168.1.12:8080/user/delete/${id}`);
 };
 
-const updateOne = (id, data) => {
+const updateOneCus = (id, data) => {
   return HttpRequest.put(`http://192.168.1.12:8080/user/update/${id}`, data);
 };
 // categories
@@ -127,7 +127,7 @@ const updateOneSup = (id, data) => {
   return HttpRequest.put(`http://192.168.1.12:8080/supplier/update/${id}`, data);
 };
 export default {
-   getAll, create, deleteOne, updateOne,
+   getAllCus, createCus, deleteOneCus, updateOneCus,
    getAllCate, createCate, deleteOneCate, updateOneCate,
    getAllEm, createEm, deleteOneEm, updateOneEm,
    getAllOD, createOD, deleteOneOD, updateOneOD,
